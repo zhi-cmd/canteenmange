@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8" />
+<title>登录</title>
+<link rel="stylesheet" type="text/css" href="/canteen_war/css/login/login.css" th:href="@{/css/login/login.css}"/>
+</head>
+
+<body>
+
+<img class="bgone" src="/canteen_war/images/login/1.jpg" th:src="@{/images/login/1.jpg}"/>
+<img class="pic" src="/canteen_war/images/login/a.png" th:src="@{/images/login/a.png}"/>
+
+<div class="table">
+	<form id="form" onsubmit="return false" action="##" method="post">
+	<div class="wel">食堂管理系统后台登录</div>
+	<div class="wel1">SHI TANG GUAN LI XI TONG HOU TAI DENG LU</div>
+	<div class="user">
+		<div id="yonghu1" style=""><img src="/canteen_war/images/login/yhm.png" th:src="@{/images/login/yhm.png}"/></div>
+		<input type="text" name="account" placeholder="用户名" />
+	</div>			
+	<div class="password">
+		<div id="yonghu"><img src="/canteen_war/images/login/mm.png" th:src="@{/images/login/mm.png}"/></div>
+		<input type="password" name="password" placeholder="●●●●●●"/>
+	</div>
+	<input class="btn" type="button" name="登录" value="登录" onclick="login()"/>
+		<input class="btn2" type="button" name="ProviderSignUp" value="ProviderSignUp" onclick="sign()"/>
+	</form>
+</div>
+<script type="text/javascript" src="/canteen_war/js/jquery/jquery-3.0.0.min.js" th:src="@{/js/jquery/jquery-3.0.0.min.js}"></script>
+<script type="text/javascript" src="/canteen_war/js/jquery/jquery-3.0.0.js" th:src="@{/js/jquery/jquery-3.0.0.js}"></script>
+<script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var arrayData, objectData;
+		arrayData = this.serializeArray();
+		objectData = {};
+		$.each(arrayData, function() {
+			var value;
+			if (this.value != null && this.value != '') {
+				value = this.value;
+			} else {
+				value = null;
+			}
+			if (objectData[this.name] != null) {
+				if (!objectData[this.name].push) {
+					objectData[this.name] = [ objectData[this.name] ];
+				}
+
+				objectData[this.name].push(value);
+			} else {
+				objectData[this.name] = value;
+			}
+		});
+		return objectData;
+	}
+	function login() {
+		var Object=$("#form").serializeObject();
+		var json =JSON.stringify(Object);
+		$.ajax({
+			contentType:'application/x-www-form-urlencoded;charset=utf-8',
+			url:"/user/login",
+			type:"POST",
+			data:Object,
+			success:function(result,testStatus){
+				if(result.msg==="true"){//成功
+					//判断权限内容
+						window.location.href="/dashboard.html";
+				}
+				else {
+					if(result.msg==="false1") {
+						alert("该账号不存在，请联系管理员添加");
+					}
+					else {
+						alert("密码错误，请重试");
+					}
+				}
+			},
+			error:function(xhr,errorMessage,e){
+				alert(xhr.toString());
+			}
+		})
+	}
+	function sign() {
+		window.location.href="/register.html";
+	}
+</script>
+</body>
+
+</html>

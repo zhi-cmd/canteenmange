@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/htmlHead :: common_header">
+    <title>订单详情</title>
+</head>
+<body>
+<input id="orderDetail" style="display: none" th:value="${ordernumber}">
+<table class="layui-hide" id="test" lay-filter="test"></table>
+<div id="chart1" style="width: 600px;height:300px;"></div>
+<script>
+    var ordernumber = document.getElementById("orderDetail").value;
+    $.ajax({
+        contentType:'application/x-www-form-urlencoded;charset=utf-8',
+        url:"/order/chart/"+ordernumber,
+        type:"GET",
+        success:function(result,testStatus){
+            var myChart = echarts.init(document.getElementById('chart1'));
+            myChart.setOption({
+                color: ['#3398DB'],
+                tooltip : {
+                    trigger: 'axis',
+                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : result.xData,
+                        axisTick: {
+                            alignWithLabel: true
+                        }
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                series : [
+                    {
+                        name:'发货量',
+                        type:'bar',
+                        barWidth: '60%',
+                        data:result.yData
+                    }
+                ]
+            });
+
+
+        },
+        error:function(xhr,errorMessage,e){
+            alert(xhr.toString());
+        }
+    });
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            ,url:'/order/list/'+ordernumber
+            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '提示'
+                ,layEvent: 'LAYTABLE_TIPS'
+                ,icon: 'layui-icon-tips'
+            }]
+            ,title: '订单详情'
+            ,cols: [[
+                {type: 'checkbox', fixed: 'left'}
+                ,{field:'fooduid', title:'ID', minWidth:40, fixed: 'left', unresize: true, sort: true}
+                ,{field:'foodname', title:'菜名', minWidth:80}
+                ,{field:'askedamount', title:'发货量', minWidth:80, sort: true}
+                ,{field:'finishtime', title:'发起时间', minWidth:80, templet: "<div>{{layui.util.toDateString(d.ordertime, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+                ,{field:'ordernumber', title:'订单号',minWidth:80}
+                //,{field:'status', title:'订单状态', width:80, sort: true}
+            ]]
+            ,page: true
+            ,parseData:function(res){ //res 即为原始返回的数据
+                var current_pages;
+                //第一次显示的时候this.page=true，吧这种情况单独列出
+                if(this.page===true)current_pages=1;
+                else current_pages=this.page.curr;
+                var result = res.data.slice(this.limit*(current_pages-1),this.limit*current_pages);
+                return {
+                    "code": res.code,
+                    "msg":res.msg,
+                    "count": res.data.length,
+                    "data": result
+                }
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

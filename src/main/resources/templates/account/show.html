@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/canteen_war/layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+</head>
+<body>
+<table id="demo" lay-filter="test"></table>
+<script src="/canteen_war/layui/layui.js" th:src="@{/layui/layui.js}"></script>
+<script src="/canteen_war/layui/layui.all.js" th:src="@{/layui/layui.all.js}"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">添加</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/javascript" src="/canteen_war/js/jquery/jquery-3.0.0.min.js" th:src="@{/js/jquery/jquery-3.0.0.min.js}"></script>
+<script type="text/javascript" src="/canteen_war/js/jquery/jquery-3.0.0.js" th:src="@{/js/jquery/jquery-3.0.0.js}"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,height: 600
+            ,url: '/users' //数据接口
+            ,page: true //开启分页
+            ,parseData:function(res){ //res 即为原始返回的数据
+                var current_pages;
+                //第一次显示的时候this.page=true，吧这种情况单独列出
+                if(this.page===true)current_pages=1;
+                else current_pages=this.page.curr;
+                var result = res.data.slice(this.limit*(current_pages-1),this.limit*current_pages);
+                return {
+                    "code": res.code,
+                    "msg":res.msg,
+                    "count": res.data.length,
+                    "data": result
+                }
+            }
+            ,cols: [[ //表头
+                {field: 'id', title: 'ID', width:180, sort: true, fixed: 'left'}
+                ,{field: 'username', title: '用户名', width:180}
+                ,{field: 'account', title: '账号', width:180, sort: true}
+                ,{field: 'password', title: '密码', width:180}
+                ,{field: 'identity', title: '身份', width: 180}
+                ,{fixed: 'right', width:200, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
+            ]]
+            ,done: function(res, curr, count){
+                //表格渲染完成回调,若用户权限不足则进行权限提示
+                if(res.msg!=="success"){
+                    //有提示消息
+                    layer.alert(res.msg);
+                }
+            }
+        });
+        table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+
+            if(layEvent === 'detail'){ //查看
+                //do somehing
+            } else if(layEvent === 'del'){ //删除
+                layer.confirm('确定删除该账户', function(index){
+                    $.ajax({
+                        contentType:'application/x-www-form-urlencoded;charset=utf-8',
+                        url:"/user/"+data.id,
+                        type:"DELETE",
+                        success:function(result){
+                            if(result.msg==="success"){//成功
+                                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                layer.msg("删除成功",{
+                                    icon:1
+                                    }
+                                )
+                            }
+                            else {
+                                layer.msg("删除失败");
+                            }
+                        },
+                        error:function(xhr,errorMessage,e){
+                            alert(xhr.toString());
+                        }
+                    });
+                    layer.close(index);
+                    //向服务端发送删除指令
+                }
+                ,{
+                    icon:0
+                    });
+            } else if(layEvent === 'edit'){ //添加
+                //do something
+                layer.open({
+                    type: 2,
+                    title: '添加账号'
+                    ,area: ['900px', '300px']
+                    ,content: '/account/add.html'
+                    //弹出窗口关闭后的回调
+                    ,cancel: function(index, layero){
+                        table.reload('demo', {
+                            url: '/users'
+                            ,where: {} //设定异步数据接口的额外参数
+                            //,height: 300
+                        });
+                        layer.close(index)
+                        return false;
+                    }
+                });
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

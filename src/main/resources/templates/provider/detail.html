@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/htmlHead :: common_header">
+    <title>供应商信息</title>
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>供应商信息完善</legend>
+</fieldset>
+<input id="providernum" style="display: none" th:value="${providerMsg.getProvidernum()}">
+<form class="layui-form" action="">
+<div class="layui-form-item">
+    <label class="layui-form-label">商店名字</label>
+    <div class="layui-input-block">
+        <input name="shopname" class="layui-input" type="text" placeholder="请输入" autocomplete="off" lay-verify="required" lay-reqtext="商户名字不能为空" th:value="${providerMsg.getShopname()}">
+    </div>
+</div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">输入手机号</label>
+            <div class="layui-input-inline">
+                <input name="connect" class="layui-input" type="tel" autocomplete="off" lay-verify="required|phone" th:value="${providerMsg.getConnect()}">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">输入邮箱</label>
+            <div class="layui-input-inline">
+                <input name="shopmsg" class="layui-input" type="text" autocomplete="off" lay-verify="email" th:value="${providerMsg.getShopmsg()}">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">详细地址</label>
+        <div class="layui-input-block">
+            <input name="location" class="layui-input" type="text" placeholder="请输入" autocomplete="off" lay-verify="required" lay-reqtext="必填项不能为空" th:value="${providerMsg.getLocation()}">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">输入身份证</label>
+        <div class="layui-input-block">
+            <input name="license" class="layui-input" type="text" placeholder="" autocomplete="off" lay-verify="identity" th:value="${providerMsg.getLicense()}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" type="submit" lay-filter="demo1" lay-submit="">立即提交</button>
+            <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+        </div>
+    </div>
+
+</form>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function() {
+        var form = layui.form
+            , layer = layui.layer;
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            $.ajax({
+                contentType:'application/x-www-form-urlencoded;charset=utf-8',
+                url:"/provider/message/"+document.getElementById("providernum").value,
+                type:"PUT",
+                data:data.field,
+                success:function(result,testStatus){
+                    if(result.return==="true"){//成功
+                        //判断权限内容
+                        layer.msg('个人信息修改成功', {
+                            time: 1000, //20s后自动关闭
+                            icon:1
+                        });
+                    }
+                    else {
+                        layer.msg('修改失败，请稍后重试', {
+                            time: 1000, //20s后自动关闭
+                            icon:0
+                        });
+                    }
+                },
+                error:function(xhr,errorMessage,e){
+                    alert(xhr.toString());
+                }
+            });
+            return false;
+        });
+    })
+</script>
+</body>
+</html>

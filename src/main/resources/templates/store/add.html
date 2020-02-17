@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/htmlHead :: common_header">
+    <title>新增菜品</title>
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>新增菜品信息</legend>
+</fieldset>
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">菜品名称</label>
+        <div class="layui-input-block">
+            <input name="foodname" class="layui-input" type="text" placeholder="请输入" autocomplete="off" lay-verify="required" lay-reqtext="必填项不能为空">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">当前剩余数量</label>
+            <div class="layui-input-inline">
+                <input name="foodamount" class="layui-input" type="tel" autocomplete="off" lay-verify="required|number" lay-reqtext="请输入正确格式的数字">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">上限报警值</label>
+            <div class="layui-input-inline">
+                <input name="alarmamount" class="layui-input" type="text" autocomplete="off" lay-verify="required|number" lay-reqtext="请输入正确格式的数字">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">下限报警值</label>
+        <div class="layui-input-block">
+            <input name="lowalarmamount" class="layui-input" type="text" placeholder="请输入" autocomplete="off" lay-verify="required|number" lay-reqtext="请输入正确格式的数字" >
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">单价</label>
+        <div class="layui-input-block">
+            <input name="money" class="layui-input" type="text" placeholder="" autocomplete="off" lay-verify="required|number" lay-reqtext="请输入正确格式的数字" >
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" type="submit" lay-filter="demo1" lay-submit="">立即提交</button>
+            <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+        </div>
+    </div>
+
+</form>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function() {
+        var form = layui.form
+            , layer = layui.layer;
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            if(data.field.lowalarmamount<data.field.alarmamount) {
+                $.ajax({
+                    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                    url: "/store/addfood",
+                    type: "POST",
+                    data: data.field,
+                    success: function (result, testStatus) {
+                        if (result.return === "success") {//成功
+                            //判断权限内容
+                            layer.msg('添加成功', {
+                                time: 1000, //20s后自动关闭
+                                icon: 1
+                            });
+                        } else {
+                            layer.msg('该菜品已经存在，请勿重复添加', {
+                                time: 1000, //20s后自动关闭
+                                icon: 0
+                            });
+                        }
+                    },
+                    error: function (xhr, errorMessage, e) {
+                        alert(xhr.toString());
+                    }
+                });
+            }
+            else {
+                layer.msg('低报警数量要小于高报警数量', {
+                    time: 1000, //20s后自动关闭
+                    icon: 0
+                });
+            }
+            return false;
+        });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/canteen_war/layui/css/layui.css"  media="all" th:href="@{/layui/css/layui.css}">
+    <script type="text/javascript" src="/canteen_war/js/jquery/jquery-3.0.0.min.js" th:src="@{/js/jquery/jquery-3.0.0.min.js}"></script>
+    <script type="text/javascript" src="/canteen_war/js/jquery/jquery-3.0.0.js" th:src="@{/js/jquery/jquery-3.0.0.js}"></script>
+    <script type="text/javascript" src="/canteen_war/js/dist/echarts.js" th:src="@{/js/dist/echarts.js}"></script>
+</head>
+<body>
+<input id="food" style="display: none" th:value="${foodid}">
+<fieldset class="layui-elem-field site-demo-button" style="margin-top: 30px;">
+    <legend>信息选择</legend>
+    <div>
+        <button class="layui-btn layui-btn-primary" type="button" id="UWeek" onclick="drawChart(this.id)">本周数据</button>
+        <button class="layui-btn" type="button" id="UMonth" onclick="drawChart(this.id)">近一个月使用量</button>
+        <button class="layui-btn layui-btn-normal" type="button" id="UJidu" onclick="drawChart(this.id)">本季度使用量</button>
+        <button class="layui-btn layui-btn-warm" type="button" id="UYear" onclick="drawChart(this.id)">当年使用量</button>
+    </div>
+</fieldset>
+<div id="chart1" style="width: 600px;height:300px;"></div>
+    <script>
+        function drawChart(id) {
+            var foodid=document.getElementById("food").value;
+            $.ajax({
+                contentType:'application/x-www-form-urlencoded;charset=utf-8',
+                url:"/chart/show/"+foodid+"?type="+id,
+                type:"GET",
+                success:function(result,testStatus){
+                    var myChart = echarts.init(document.getElementById('chart1'));
+                    myChart.setOption({
+                        xAxis: {
+                            type: 'category',
+                            data: result.xData
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [{
+                            data: result.yData,
+                            type: 'line'
+                        }]
+                    });
+
+
+                },
+                error:function(xhr,errorMessage,e){
+                    alert(xhr.toString());
+                }
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/htmlHead :: common_header">
+    <title>供应商展示</title>
+</head>
+<body>
+<table class="layui-hide" id="test" lay-filter="test"></table>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="ok">通过</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">忽略</a>
+</script>
+
+<script id="switchTpl" type="text/html">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="text" class="normal-input" name="备注"  lay-filter="beizhu" >
+</script>
+
+<script id="checkboxTpl" type="text/html">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="lock" value="{{d.id}}" title="锁定" lay-filter="lockDemo" {{ d.id == 10006 ? 'checked' : '' }}>
+</script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table
+            ,form = layui.form;
+        table.render({
+            elem: '#test'
+            ,url:'/providers/notdeal'
+            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '提示'
+                ,layEvent: 'LAYTABLE_TIPS'
+                ,icon: 'layui-icon-tips'
+            }]
+            ,cellMinWidth: 80
+            ,cols: [[
+                {type:'numbers'}
+                ,{type: 'checkbox'}
+                ,{field:'providernum', title:'供应商账号', width:100, unresize: true, sort: true}
+                ,{field:'shopname', title:'商家名称', templet: '#usernameTpl'}
+                ,{field:'connect', title:'手机号'}
+                ,{field:'shopmsg', title: '邮箱', minWidth:100 }
+                ,{field:'location',title:'店铺地址',minWidth:150}
+                ,{field:'license',title:'商家身份证',width:100}
+                ,{fixed: 'right', width:300, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
+
+            ]]
+            ,page: true
+        });
+        table.on('tool(test)', function(obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+            if(layEvent === 'detail'){ //查看
+            }else if(layEvent==='ok'){
+                //确认订单
+                $.ajax({
+                    contentType:'application/x-www-form-urlencoded;charset=utf-8',
+                    url:"/provider/approve/"+data.providernum,
+                    type:"PUT",
+                    success:function(result,testStatus){
+                        if(result.return==="true"){//审核成功
+                            layer.msg('供应商审核成功',{
+                                icon:1
+                            });
+                            table.reload('test', {
+                                url: '/providers/notdeal'
+                            });
+                        }
+                    },
+                    error:function(xhr,errorMessage,e){
+                        alert(xhr.toString());
+                    }
+                })
+
+            }else if(layEvent==='del'){//忽略该供应商请求
+                $.ajax({
+                    contentType:'application/x-www-form-urlencoded;charset=utf-8',
+                    url:"/provider/approve/"+data.providernum,
+                    type:"DELETE",
+                    success:function(result,testStatus){
+                        if(result.return==="true"){//审核成功
+                            layer.msg('操作成功',{
+                                icon:1
+                            });
+                            table.reload('test', {
+                                url: '/providers/notdeal'
+                            });
+                        }
+                    },
+                    error:function(xhr,errorMessage,e){
+                        alert(xhr.toString());
+                    }
+                })
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

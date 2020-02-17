@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/htmlHead :: common_header">
+    <title>供应商订单</title>
+</head>
+<body>
+
+<table class="layui-hide" id="test" lay-filter="test"></table>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="wait">待发货订单</button>
+        <button class="layui-btn layui-btn-sm" lay-event="trace">问题订单跟踪</button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="detail">查看详情</a>
+    <a class="layui-btn layui-btn-xs" lay-event="ok">确认订单</a>
+</script>
+<script id="switchTpl" type="text/html">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="text" class="normal-input" name="备注"  lay-filter="beizhu" >
+</script>
+<script id="checkboxTpl" type="text/html">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="lock" value="{{d.id}}" title="锁定" lay-filter="lockDemo" {{ d.id == 10006 ? 'checked' : '' }}>
+</script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table
+            ,form = layui.form;
+
+        table.render({
+            elem: '#test'
+            ,url:'/provider/orders'
+            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '提示'
+                ,layEvent: 'LAYTABLE_TIPS'
+                ,icon: 'layui-icon-tips'
+            }]
+            ,cellMinWidth: 80
+            ,cols: [[
+                {type:'numbers'}
+                ,{type: 'checkbox'}
+                ,{field:'ordernumber', title:'订单号', width:100, unresize: true, sort: true}
+                ,{field:'provideraccount', title:'供应商账户', templet: '#usernameTpl'}
+                ,{field:'totalmoney', title:'订单金额'}
+                ,{field:'status', title: '订单状态', minWidth:100 }
+                ,{field:'sex', title:'备注信息', width:160, templet: '#switchTpl', unresize: false}
+                ,{fixed: 'right', width:300, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
+
+            ]]
+            ,page: true
+            ,parseData:function(res){ //res 即为原始返回的数据
+                var current_pages;
+                //第一次显示的时候this.page=true，吧这种情况单独列出
+                if(this.page===true)current_pages=1;
+                else current_pages=this.page.curr;
+                var result = res.data.slice(this.limit*(current_pages-1),this.limit*current_pages);
+                return {
+                    "code": res.code,
+                    "msg":res.msg,
+                    "count": res.data.length,
+                    "data": result
+                }
+            }
+        });
+        table.on('tool(test)', function(obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+            if(layEvent === 'detail'){ //查看
+                layer.open({
+                    type: 2,
+                    title: '订单详情'
+                    ,area: ['700px', '500px']
+                    ,content: '/order/detail/+'+data.ordernumber
+                    ,cancel: function(index, layero){
+                        layer.close(index);
+                        return false;
+                    }
+                });
+            }else if(layEvent==='ok'){
+                //确认订单
+                $.ajax({
+                    contentType:'application/json;charset=utf-8',
+                    url:"/provider/send/"+data.ordernumber,
+                    type:"PUT",
+                    success:function(result,testStatus){
+                        if(result.return==="true"){
+                            layer.msg("订单发货成功",{
+                                icon:1
+                            });
+                            table.reload('test', {
+                                url: '/provider/orders'
+                            });
+                        }
+                        else {
+                            layer.msg('您的账号未通过认证，请完善信息等待食堂认证', {
+                                time: 2000, //20s后自动关闭
+                                icon:4
+                            });
+                        }
+                    },
+                    error:function(xhr,errorMessage,e){
+                        alert(xhr.toString());
+                    }
+                })
+
+            }
+        });
+
+        //头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'wait'://待发货订单
+                    table.reload('test', {
+                        url: '/provider/orders'
+                    });
+                    break;
+                case 'trace'://有问题的订单，拒绝收货的订单
+                    table.reload('test', {
+                        url: '/provider/reject'
+                    });
+                    break;
+                case 'LAYTABLE_TIPS':
+                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                    break;
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

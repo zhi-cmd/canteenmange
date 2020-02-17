@@ -1,0 +1,8663 @@
+
+<!DOCTYPE html xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+</head>
+
+<title>API Document</title>
+
+
+
+<xmp theme="united" style="display:none;">
+
+    
+#接口说明文档
+
+
+
+
+
+## HTTP | HTTPS://localhost:8080
+
+
+
+
+
+接口说明文档
+
+
+
+
+
+
+
+**Version** v1
+
+
+
+[**Terms of Service**]()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# APIs
+
+
+
+
+
+## /chart/show/{foodid}
+
+
+
+
+
+### GET
+
+
+
+
+<a id="storeChartShow">使用量图表数据获取</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>type</th>
+
+    <td>query</td>
+
+    <td>yes</td>
+
+    <td>图表种类</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>string </td>
+
+    
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>foodid</th>
+
+    <td>path</td>
+
+    <td>yes</td>
+
+    <td>菜品编号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>integer (int32)</td>
+
+    
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /order/chart/{ordernumber}
+
+
+
+
+
+### GET
+
+
+
+
+<a id="orderChart">获取订单图表数据</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>ordernumber</th>
+
+    <td>path</td>
+
+    <td>yes</td>
+
+    <td>订单编号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>integer (int32)</td>
+
+    
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /order/check/{ordernumber}
+
+
+
+
+
+
+
+
+
+### PUT
+
+
+
+
+<a id="checkOrder">审核单个订单</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>ordernumber</th>
+
+    <td>path</td>
+
+    <td>yes</td>
+
+    <td>订单编号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>integer (int32)</td>
+
+    
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td></td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    
+
+    <a href="#/definitions/HttpServletRequest">HttpServletRequest</a> 
+
+    </td>
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /order/confirm/{ordernumber}
+
+
+
+
+
+
+
+
+
+### PUT
+
+
+
+
+<a id="confirmRecOrder">确认收货</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>ordernumber</th>
+
+    <td>path</td>
+
+    <td>yes</td>
+
+    <td>订单编号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>integer (int32)</td>
+
+    
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /order/delete/{ordernumber}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### DELETE
+
+
+
+
+<a id="deleteOrder">删除对应的订单</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>ordernumber</th>
+
+    <td>path</td>
+
+    <td>yes</td>
+
+    <td>订单编号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>integer (int32)</td>
+
+    
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /order/detail/{ordernumber}
+
+
+
+
+
+### GET
+
+
+
+
+<a id="showOrderDeatil">跳转订单详情界面</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td></td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    
+
+    <a href="#/definitions/Model">Model</a> 
+
+    </td>
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>ordernumber</th>
+
+    <td>path</td>
+
+    <td>yes</td>
+
+    <td>订单编号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>integer (int32)</td>
+
+    
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /order/list/{ordernumber}
+
+
+
+
+
+### GET
+
+
+
+
+<a id="orderList">获取订单详细数据</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>ordernumber</th>
+
+    <td>path</td>
+
+    <td>yes</td>
+
+    <td>订单编号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>integer (int32)</td>
+
+    
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /order/reject/{ordernumber}
+
+
+
+
+
+
+
+
+
+### PUT
+
+
+
+
+<a id="rejectRecOrder">拒绝收货</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>ordernumber</th>
+
+    <td>path</td>
+
+    <td>yes</td>
+
+    <td>订单编号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>integer (int32)</td>
+
+    
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /orders
+
+
+
+
+
+### GET
+
+
+
+
+<a id="ordersShow">获取订单列表</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /orders/check
+
+
+
+
+
+
+
+
+
+### PUT
+
+
+
+
+<a id="checkOrders">批量审核订单</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td>待确认的订单对象列表</td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    Array[<a href="#/definitions/OrderFood">OrderFood</a>]
+
+    
+
+    </td>
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td></td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    
+
+    <a href="#/definitions/HttpServletRequest">HttpServletRequest</a> 
+
+    </td>
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /orders/confirm
+
+
+
+
+
+
+
+
+
+### PUT
+
+
+
+
+<a id="checkOrder">批量确认收货</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td>选取的订单对象列表</td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    Array[<a href="#/definitions/OrderFood">OrderFood</a>]
+
+    
+
+    </td>
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /orders/notdeal
+
+
+
+
+
+### GET
+
+
+
+
+<a id="notCheckOrder">获取未处理的订单</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /preorder/make
+
+
+
+
+
+
+
+
+
+
+
+
+
+### POST
+
+
+
+
+
+
+<a id="makeOrder">预购请求生成订单</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td>预购请求列表</td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    Array[<a href="#/definitions/AskedFood">AskedFood</a>]
+
+    
+
+    </td>
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /preorders/all
+
+
+
+
+
+### GET
+
+
+
+
+<a id="preorderAll">查看所有的预购请求</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /preorders/notdeal
+
+
+
+
+
+### GET
+
+
+
+
+<a id="preorderNotDeal">获取所有未处理的订单</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /provider/approve/{providernum}
+
+
+
+
+
+
+
+
+
+### PUT
+
+
+
+
+<a id="providerApprove">认证供应商</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>providernum</th>
+
+    <td>path</td>
+
+    <td>yes</td>
+
+    <td>供应商账号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>string </td>
+
+    
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### DELETE
+
+
+
+
+<a id="providerIgnore">忽略供应商认证请求</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>providernum</th>
+
+    <td>path</td>
+
+    <td>yes</td>
+
+    <td>供应商账号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>string </td>
+
+    
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /provider/message
+
+
+
+
+
+### GET
+
+
+
+
+<a id="providerMsgDetail">供应商信息跳转</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td></td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    
+
+    <a href="#/definitions/Model">Model</a> 
+
+    </td>
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td></td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    
+
+    <a href="#/definitions/HttpServletRequest">HttpServletRequest</a> 
+
+    </td>
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /provider/message/{providernum}
+
+
+
+
+
+
+
+
+
+### PUT
+
+
+
+
+<a id="providerMsg">更新供应商信息</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td>提交的供应商信息</td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    
+
+    <a href="#/definitions/ProviderMsg">ProviderMsg</a> 
+
+    </td>
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>providernum</th>
+
+    <td>path</td>
+
+    <td>yes</td>
+
+    <td>供应商账号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>string </td>
+
+    
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td></td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    
+
+    <a href="#/definitions/HttpServletRequest">HttpServletRequest</a> 
+
+    </td>
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /provider/orders
+
+
+
+
+
+### GET
+
+
+
+
+<a id="providerOrders">待发货订单显示</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /provider/reject
+
+
+
+
+
+### GET
+
+
+
+
+<a id="providerReject">当前供应商的问题订单</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td></td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    
+
+    <a href="#/definitions/HttpServletRequest">HttpServletRequest</a> 
+
+    </td>
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /provider/send/{ordernumber}
+
+
+
+
+
+
+
+
+
+### PUT
+
+
+
+
+<a id="providerSend">确认发货</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>ordernumber</th>
+
+    <td>path</td>
+
+    <td>yes</td>
+
+    <td>确认发货</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>integer (int32)</td>
+
+    
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td></td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    
+
+    <a href="#/definitions/HttpServletRequest">HttpServletRequest</a> 
+
+    </td>
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /providers/notdeal
+
+
+
+
+
+### GET
+
+
+
+
+<a id="providerIdentifyShow">获取待认证供应商列表</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /store/alarms
+
+
+
+
+
+### GET
+
+
+
+
+<a id="alarmStore">库存报警请求</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /store/ask
+
+
+
+
+
+
+
+
+
+### PUT
+
+
+
+
+<a id="askedStore">菜品购入请求</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>foodid</th>
+
+    <td>query</td>
+
+    <td>yes</td>
+
+    <td>菜品编号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>integer (int32)</td>
+
+    
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>changenum</th>
+
+    <td>query</td>
+
+    <td>yes</td>
+
+    <td>请求量</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>string </td>
+
+    
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /store/chart/{id}
+
+
+
+
+
+### GET
+
+
+
+
+<a id="storeChart">打开图表显示</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>id</th>
+
+    <td>path</td>
+
+    <td>yes</td>
+
+    <td>菜品编号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>integer (int32)</td>
+
+    
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td></td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    
+
+    <a href="#/definitions/Model">Model</a> 
+
+    </td>
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /store/receives
+
+
+
+
+
+### GET
+
+
+
+
+<a id="storeReceivedOrder">已发货订单显示</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /store/rejects
+
+
+
+
+
+### GET
+
+
+
+
+<a id="storeRejectOrder">拒绝入库订单显示</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /store/totals
+
+
+
+
+
+### GET
+
+
+
+
+<a id="showAll">查询所有库存</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /store/use
+
+
+
+
+
+
+
+
+
+### PUT
+
+
+
+
+<a id="useFood">菜品使用</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>foodid</th>
+
+    <td>query</td>
+
+    <td>yes</td>
+
+    <td>菜品编号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>integer (int32)</td>
+
+    
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>changenum</th>
+
+    <td>query</td>
+
+    <td>yes</td>
+
+    <td>使用量</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>integer (int32)</td>
+
+    
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /user
+
+
+
+
+
+
+
+
+
+
+
+
+
+### POST
+
+
+
+
+
+
+<a id="addAccout">添加账户</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td>用户详细信息</td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    
+
+    <a href="#/definitions/UserLogin">UserLogin</a> 
+
+    </td>
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /user/login
+
+
+
+
+
+
+
+
+
+
+
+
+
+### POST
+
+
+
+
+
+
+<a id="testAjax">判断用户登录</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>account</th>
+
+    <td>query</td>
+
+    <td>yes</td>
+
+    <td>用户账号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>string </td>
+
+    
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>password</th>
+
+    <td>query</td>
+
+    <td>yes</td>
+
+    <td>用户密码</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>string </td>
+
+    
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td></td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    
+
+    <a href="#/definitions/HttpServletRequest">HttpServletRequest</a> 
+
+    </td>
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /user/register
+
+
+
+
+
+
+
+
+
+
+
+
+
+### POST
+
+
+
+
+
+
+<a id="providerSignUp">新增供应商</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>account</th>
+
+    <td>query</td>
+
+    <td>yes</td>
+
+    <td>供应商账号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>string </td>
+
+    
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>password</th>
+
+    <td>query</td>
+
+    <td>yes</td>
+
+    <td>供应商密码</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>string </td>
+
+    
+
+
+
+</tr>
+
+
+
+<tr>
+
+    <th>username</th>
+
+    <td>query</td>
+
+    <td>yes</td>
+
+    <td>供应商用户名</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>string </td>
+
+    
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /user/{id}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### DELETE
+
+
+
+
+<a id="deleteAccout">删除账户</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>id</th>
+
+    <td>path</td>
+
+    <td>yes</td>
+
+    <td>删除账号的编号</td>
+
+    <td> - </td>
+
+
+
+    
+
+            <td>integer (int32)</td>
+
+    
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## /users
+
+
+
+
+
+### GET
+
+
+
+
+<a id="accountMsg">显示所有用户</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Request
+
+
+
+
+
+
+
+##### Parameters
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>Name</th>
+
+        <th>Located in</th>
+
+        <th>Required</th>
+
+        <th>Description</th>
+
+        <th>Default</th>
+
+        <th>Schema</th>
+
+    </tr>
+
+
+
+
+
+
+
+<tr>
+
+    <th>body</th>
+
+    <td>body</td>
+
+    <td>no</td>
+
+    <td></td>
+
+    <td> - </td>
+
+
+
+    <td>
+
+    
+
+    <a href="#/definitions/HttpServletRequest">HttpServletRequest</a> 
+
+    </td>
+
+
+
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+#### Response
+
+
+
+
+
+
+
+
+
+| Status Code | Reason      | Response Model |
+
+|-------------|-------------|----------------|
+
+| 200    | successful operation | <a href="#/definitions/RestMessage">RestMessage</a>|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Definitions
+
+
+
+## <a name="/definitions/AskedFood">AskedFood</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+        <tr>
+
+            <td>foodname</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>fooduid</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int32)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>askedamount</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>finishtime</td>
+
+            <td>
+
+                
+
+                    
+
+                    string (date-time)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>ordernumber</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int32)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>status</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/BufferedReader">BufferedReader</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/Cookie">Cookie</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+        <tr>
+
+            <td>name</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>value</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>comment</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>domain</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>maxAge</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int32)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>path</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>secure</td>
+
+            <td>
+
+                
+
+                    
+
+                    boolean
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>version</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int32)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/Enumeration">Enumeration</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/HttpServletRequest">HttpServletRequest</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+        <tr>
+
+            <td>method</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>requestedSessionIdValid</td>
+
+            <td>
+
+                
+
+                    
+
+                    boolean
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>pathTranslated</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>requestedSessionIdFromCookie</td>
+
+            <td>
+
+                
+
+                    
+
+                    boolean
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>requestedSessionIdFromURL</td>
+
+            <td>
+
+                
+
+                    
+
+                    boolean
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>requestedSessionIdFromUrl</td>
+
+            <td>
+
+                
+
+                    
+
+                    boolean
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>requestedSessionId</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>session</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/HttpSession">HttpSession</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>userPrincipal</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/Principal">Principal</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>contextPath</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>requestURL</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/StringBuffer">StringBuffer</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>headerNames</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/Enumeration">Enumeration</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>remoteUser</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>authType</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>pathInfo</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>servletPath</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>requestURI</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>queryString</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>cookies</td>
+
+            <td>
+
+                
+
+                
+
+                    array[<a href="#/definitions/Cookie">Cookie</a>]
+
+                
+
+                
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>scheme</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>inputStream</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/ServletInputStream">ServletInputStream</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>protocol</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>reader</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/BufferedReader">BufferedReader</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>contentLength</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int32)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>contentType</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>locale</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/Locale">Locale</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>attributeNames</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/Enumeration">Enumeration</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>characterEncoding</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>parameterMap</td>
+
+            <td>
+
+                
+
+                    
+
+                    object
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>parameterNames</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/Enumeration">Enumeration</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>localName</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>remoteHost</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>remotePort</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int32)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>serverName</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>localPort</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int32)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>locales</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/Enumeration">Enumeration</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>remoteAddr</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>secure</td>
+
+            <td>
+
+                
+
+                    
+
+                    boolean
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>localAddr</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>serverPort</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int32)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/HttpSession">HttpSession</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+        <tr>
+
+            <td>id</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>creationTime</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int64)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>attributeNames</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/Enumeration">Enumeration</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>servletContext</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/ServletContext">ServletContext</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>maxInactiveInterval</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int32)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>sessionContext</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/HttpSessionContext">HttpSessionContext</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>lastAccessedTime</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int64)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>valueNames</td>
+
+            <td>
+
+                
+
+                
+
+                array[string]
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>new</td>
+
+            <td>
+
+                
+
+                    
+
+                    boolean
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/HttpSessionContext">HttpSessionContext</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+        <tr>
+
+            <td>ids</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/Enumeration">Enumeration</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/Locale">Locale</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+        <tr>
+
+            <td>language</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>country</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>displayCountry</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>displayLanguage</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>displayName</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>displayScript</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>displayVariant</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>extensionKeys</td>
+
+            <td>
+
+                
+
+                
+
+                array[string]
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>iso3Country</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>iso3Language</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>script</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>unicodeLocaleAttributes</td>
+
+            <td>
+
+                
+
+                
+
+                array[string]
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>unicodeLocaleKeys</td>
+
+            <td>
+
+                
+
+                
+
+                array[string]
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>variant</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/Model">Model</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/OrderFood">OrderFood</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+        <tr>
+
+            <td>ordernumber</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int32)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>provideraccount</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>totalmoney</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>status</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>ordertime</td>
+
+            <td>
+
+                
+
+                    
+
+                    string (date-time)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/Principal">Principal</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+        <tr>
+
+            <td>name</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/ProviderMsg">ProviderMsg</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+        <tr>
+
+            <td>providernum</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>shopname</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>connect</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>shopmsg</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>location</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>license</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>status</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/RestMessage">RestMessage</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+        <tr>
+
+            <td>count</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>数据数量</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>data</td>
+
+            <td>
+
+                
+
+                    
+
+                    object
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>返回数据</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>code</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int32)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>返回编号</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>msg</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>返回信息</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/ServletContext">ServletContext</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+        <tr>
+
+            <td>attributeNames</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/Enumeration">Enumeration</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>initParameterNames</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/Enumeration">Enumeration</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>servletContextName</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>majorVersion</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int32)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>minorVersion</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int32)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>contextPath</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>servlets</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/Enumeration">Enumeration</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>servletNames</td>
+
+            <td>
+
+                
+
+                    <a href="#/definitions/Enumeration">Enumeration</a>
+
+                    
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>serverInfo</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/ServletInputStream">ServletInputStream</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/StringBuffer">StringBuffer</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+</table>
+
+
+
+## <a name="/definitions/UserLogin">UserLogin</a>
+
+
+
+<table border="1">
+
+    <tr>
+
+        <th>name</th>
+
+        <th>type</th>
+
+        <th>required</th>
+
+        <th>description</th>
+
+        <th>example</th>
+
+    </tr>
+
+    
+
+        <tr>
+
+            <td>id</td>
+
+            <td>
+
+                
+
+                    
+
+                    integer (int32)
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>account</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>username</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>password</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+        <tr>
+
+            <td>identity</td>
+
+            <td>
+
+                
+
+                    
+
+                    string
+
+                
+
+            </td>
+
+            <td>optional</td>
+
+            <td>-</td>
+
+            <td></td>
+
+        </tr>
+
+    
+
+</table>
+
+
+
+
+
+
+</xmp>
+
+
+
+<script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
+
+</html>

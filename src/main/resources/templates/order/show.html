@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/htmlHead :: common_header">
+    <title>订单列表</title>
+</head>
+<body>
+
+
+<table class="layui-hide" id="test" lay-filter="test"></table>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">批量审核</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">未处理订单</button>
+        <button class="layui-btn layui-btn-sm" lay-event="allOrders">全部订单</button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="detail">查看详情</a>
+    <a class="layui-btn layui-btn-xs" lay-event="ok">审核确认</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除订单</a>
+</script>
+
+<script id="switchTpl" type="text/html">
+    <input type="text" class="normal-input" name="备注"  lay-filter="beizhu" >
+</script>
+
+<script id="checkboxTpl" type="text/html">
+    <input type="checkbox" name="lock" value="{{d.id}}" title="锁定" lay-filter="lockDemo" {{ d.id == 10006 ? 'checked' : '' }}>
+</script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table
+            ,form = layui.form;
+
+        table.render({
+            elem: '#test'
+            ,url:'/orders'
+            ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '提示'
+                ,layEvent: 'LAYTABLE_TIPS'
+                ,icon: 'layui-icon-tips'
+            }]
+            ,cellMinWidth: 80
+            ,cols: [[
+                {type:'numbers'}
+                ,{type: 'checkbox'}
+                ,{field:'ordernumber', title:'订单号', width:100, unresize: true, sort: true}
+                ,{field:'provideraccount', title:'供应商账户', templet: '#usernameTpl'}
+                ,{field:'totalmoney', title:'订单金额'}
+                ,{field:'status', title: '订单状态', minWidth:100 }
+                ,{field:'sex', title:'备注信息', width:160, templet: '#switchTpl', unresize: false}
+                ,{fixed: 'right', width:300, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
+
+            ]]
+            ,page: true
+            //前端进行分页处理
+            ,parseData:function(res){ //res 即为原始返回的数据
+                var current_pages;
+                //第一次显示的时候this.page=true，吧这种情况单独列出
+                if(this.page===true)current_pages=1;
+                else current_pages=this.page.curr;
+                var result = res.data.slice(this.limit*(current_pages-1),this.limit*current_pages);
+                return {
+                    "code": res.code,
+                    "msg":res.msg,
+                    "count": res.data.length,
+                    "data": result
+                }
+            }
+        });
+        //行监听事件
+        table.on('tool(test)', function(obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+            if(layEvent === 'detail'){ //查看订单详细信息
+                layer.open({
+                    type: 2,
+                    title: '订单详情'
+                    ,area: ['700px', '500px']
+                    ,content: '/order/detail/+'+data.ordernumber
+                    ,cancel: function(index, layero){
+                        layer.close(index);
+                        return false;
+                    }
+                });
+            }else if(layEvent==='ok'){//修改订单的状态为已处理状态，此时供应商可以看到了
+                if(data.status==="未处理") {//只有未处理的订单才可以被审核
+                    $.ajax({
+                        contentType: 'application/json;charset=utf-8',
+                        url: "/order/check/" + data.ordernumber,
+                        type: "PUT",
+                        success: function (result) {
+                            if (result.status === "ok") {
+                                layer.msg('审核成功', {
+                                    time: 1000, //3s后自动关闭
+                                    icon: 1
+                                });
+                                table.reload('test', {
+                                    url: '/orders'
+                                });
+                            } else {
+                                layer.msg('权限不足，只有管理员才可以进行审核', {
+                                    time: 3000, //3s后自动关闭
+                                    icon: 4
+                                });
+                            }
+                        },
+                        error: function (xhr, errorMessage, e) {
+                            alert(xhr.toString());
+                        }
+                    });
+                }else {//其他状态都不可以被审核
+                    layer.msg('该订单已通过审核，请勿重复提交', {
+                        time: 3000, //3s后自动关闭
+                        icon: 4
+                    });
+                }
+
+            }else if(layEvent==='del'){
+                if(data.status==="未处理") {
+                    $.ajax({
+                        contentType: 'application/json;charset=utf-8',
+                        url: "/order/delete/" + data.ordernumber,
+                        type: "DELETE",
+                        data: JSON.stringify(data),
+                        success: function (result) {
+                            if (result.status === "success") {
+                                layer.msg('删除成功', {
+                                    time: 1000, //3s后自动关闭
+                                    icon: 1
+                                });
+                                table.reload('test', {
+                                    url: '/orders'
+                                });
+                            } else {
+                                layer.msg('该订单不能被删除', {
+                                    time: 3000, //3s后自动关闭
+                                    icon: 4
+                                });
+                            }
+                        },
+                        error: function (xhr, errorMessage, e) {
+                            alert(xhr.toString());
+                        }
+                    });
+                }else{//已经处理过的订单不能被取消
+                    layer.msg('该订单已通过审核，不能被取消', {
+                        time: 3000, //3s后自动关闭
+                        icon: 4
+                    });
+                }
+            }
+        });
+
+        //头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData'://批量审核
+                    var data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                    $.ajax({
+                        contentType:'application/json;charset=utf-8',
+                        url:"/orders/check",
+                        type:"PUT",
+                        data:JSON.stringify(data),
+                        success:function(result,testStatus){
+                            if(result.status==="ok"){
+                                layer.msg('审核成功', {
+                                    time: 1000, //3s后自动关闭
+                                    icon:1
+                                });
+                                table.reload('test', {
+                                    url: '/orders'
+                                });
+                            }
+                            else {
+                                layer.msg('权限不足，只有管理员才可以进行审核', {
+                                    time: 3000, //3s后自动关闭
+                                    icon:4
+                                });
+                            }
+                        },
+                        error:function(xhr,errorMessage,e){
+                            alert(xhr.toString());
+                        }
+                    });
+                    break;
+                case 'getCheckLength'://获取未处理的订单
+                    table.reload('test', {
+                        url: '/orders/notdeal'
+                    });
+                    break;
+                case 'allOrders':
+                    table.reload('test', {
+                        url: '/orders'
+                    });
+                    break;
+
+                //自定义头工具栏右侧图标 - 提示
+                case 'LAYTABLE_TIPS':
+                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                    break;
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

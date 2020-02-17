@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/canteen_war/layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+    <link rel="stylesheet" href="/canteen_war/css/normal/normal.css" th:href="@{/css/normal/normal.css}">
+</head>
+<body>
+<table id="storehouse" lay-filter="test"></table>
+<script src="/canteen_war/layui/layui.js" th:src="@{/layui/layui.js}"></script>
+<script src="/canteen_war/layui/layui.all.js" th:src="@{/layui/layui.all.js}"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="add">一键补全</a>
+</script>
+<script type="text/javascript" src="/canteen_war/js/jquery/jquery-3.0.0.min.js" th:src="@{/js/jquery/jquery-3.0.0.min.js}"></script>
+<script type="text/javascript" src="/canteen_war/js/jquery/jquery-3.0.0.js" th:src="@{/js/jquery/jquery-3.0.0.js}"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#storehouse'
+            ,height: 600
+            ,url: '/store/alarms' //数据接口
+            ,page: true //开启分页
+            ,parseData:function(res){ //res 即为原始返回的数据
+                var current_pages;
+                //第一次显示的时候this.page=true，吧这种情况单独列出
+                if(this.page===true)current_pages=1;
+                else current_pages=this.page.curr;
+                var result = res.data.slice(this.limit*(current_pages-1),this.limit*current_pages);
+                return {
+                    "code": res.code,
+                    "msg":res.msg,
+                    "count": res.data.length,
+                    "data": result
+                }
+            }
+            ,cols: [[ //表头
+                {field: 'foodname', title: '菜名称', minWidth:100, sort: true, fixed: 'left'}
+                ,{field: 'foodid', title: '菜编号', minWidth:100}
+                ,{field: 'foodamount', title: '剩余数量', minWidth:100, sort: true}
+                ,{field: 'alarmamount', title: '高报警数量', minWidth:100}
+                ,{field: 'lowalarmamount', title: '低报警数量', minWidth:100}
+                ,{fixed: 'right', minWidth:100, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
+            ]]
+        });
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            var layEvent = obj.event;
+            var tr = obj.tr;
+            if(layEvent === 'add'){
+                //检验是否位于低报警状态，处于低报警状态可以发起补全购物请求
+                completion(data);
+            }
+
+        });
+    });
+
+    /**
+     * @Description: 判断并发起补齐请求
+     * @Author zhiqiangw
+     * @Param data:该行的数据
+     * @Date 2020/2/15 19:18
+     */
+    function completion(data) {
+        if(data.foodamount>data.lowalarmamount){//处于高报警状态，无法补齐
+            layer.msg('该菜品库存量过高，不能进行补齐', {
+                icon: 2,
+                time: 2000
+            });
+        }
+        else {//可以进行补全，发起Ajax请求
+            //计算补全所要发起的购物量
+            var number = data.lowalarmamount-data.foodamount;
+            $.ajax({
+                contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                url: "/store/ask",
+                type: "PUT",
+                data: "foodid=" + data.foodid +  "&changenum=" + number,
+                success: function (result, testStatus) {
+                    layer.msg('添加成功，已添加至代购菜品', {
+                        icon: 1,
+                        time: 2000, //20s后自动关闭
+                    });
+                    obj.update({
+                        changenum: 0
+                        , title: '修改量'
+                    });
+                },
+                error: function (xhr, errorMessage, e) {
+                    alert(xhr.toString());
+                }
+            })
+        }
+    }
+
+</script>
+</body>
+</html>
